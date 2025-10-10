@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE *fp;
+    char data[100];
+
+    fp = fopen("demo.txt", "w");
+    if(fp == NULL) {
+        printf("Error opening file!");
+        return 1;
+    }
+
+    printf("Enter data to write: ");
+    fgets(data, 100, stdin);
+    fprintf(fp, "%s", data);
+    fclose(fp);
+
+    printf("\nData written successfully!\n");
+
+    // Read the file
+    fp = fopen("demo.txt", "r");
+    printf("\nReading from file:\n");
+    while(fgets(data, 100, fp))
+        printf("%s", data);
+    fclose(fp);
+
+    // Delete file
+    if(remove("demo.txt") == 0)
+        printf("\nFile deleted successfully.\n");
+    else
+        printf("\nError deleting file.\n");
+
+    return 0;
+}
